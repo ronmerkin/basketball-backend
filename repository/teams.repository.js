@@ -1,8 +1,8 @@
 'use strict'
 const Team = require('./models/teams.model')
 
-const findTeams = async () => {
-    return Team.find()
+const findTeams = async (teamName) => {
+    return Team.find({...(teamName && {name: teamName})})
 }
 const createTeams = async (teamsArr) => {
     const teams = await Promise.all(teamsArr.map(team => Team.create(team)))
