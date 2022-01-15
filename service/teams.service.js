@@ -3,9 +3,13 @@
 const { findTeams } = require('../repository/teams.repository')
 const getTeams = async (team = undefined) => {
     try {
-        return await findTeams(team)
+        const teams = await findTeams(team)
+        if (!teams || !teams.length) {
+            throw new Error('No team Found')
+        }
+        return teams
     } catch (err) {
-        throw new Error('No team Found')
+        throw err
     }
 }
 
